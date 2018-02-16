@@ -8,6 +8,8 @@ var xhb = require('express-handlebars');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var cars = require('./routes/getCars');
+var api = require('./routes/api');
 
 var app = express();
 
@@ -24,8 +26,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+// import all of your routes
+app.use(require('./routes/index', index));
+app.use(require('./routes/users', users));
+app.use(require('./routes/getCars', cars));
+app.use(require('./routes/api', api));// app.use('/', index);
+// app.use('/users', users);
+// app.use('/getCars', getCars);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
