@@ -4,17 +4,17 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res) => {
-  connect.query('SELECT * FROM mainmodel', (err, result)=> {
+  connect.query('SELECT * FROM mainmodel', (err, result) => {
     if (err) {
       throw err; console.log(err);
-    }else{
+    } else {
       console.log(result);
 
       res.render('cars', {
-        title: 'Cars ' ,
-         message : "A selection",
-         carData: result
-       });
+        title: 'Mini Cars',
+        message : "A Selection of Minis",
+        carData : result
+      });
     }
   });
 });

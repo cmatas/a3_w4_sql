@@ -2,19 +2,27 @@ var express = require('express');
 var router = express.Router();
 var config = require('../config');
 
-// do some checkinf here to chech the default user profile
+// do some checking here => check the default user profile
 // ternary statement => MDN ternary
 var toRender = (config.kidsmode) ? 'main_kids' : 'home';
-// short to if else
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render(toRender, {
-    title: 'done ' ,
+  res.render('home', {
+    title: 'Done yet? these kids',
     message : "handlebars is awesome",
     mainpage : true,
+    cms : false,
     kidsmode : config.kidsmode
   });
 });
+
+router.get('/cms', (req, res) => { //cause cms is here
+  console.log('hit the cms route');
+  res.render('cmsForm', {
+    cms : true,
+    mainpage : false
+  });
+})
 
 module.exports = router;

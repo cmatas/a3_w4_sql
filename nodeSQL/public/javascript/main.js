@@ -1,25 +1,13 @@
 (() => {
-  // variables always get declared at the top
-  let getButtons = document.querySelectorAll('.getButtons'),
-      postButton = document.querySelector('.post'),
-      deleteButton = document.querySelector('.delete');
-  function fetchData(){
+  // variables always get declared at the top of the JS file
+  let getButtons = document.querySelectorAll('.getButton'),
+      postButton = document.querySelector('.postButton'),
+      deleteButton = document.querySelector('.deleteButton');
+
+  function fetchData() {
     let url = "api/" + this.id;
 
     fetch(url)
-    .then((resp) => resp.json())
-    .then((data) => {
-      console.log(data);;
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-  }
-
-  function deleteRecord(){
-    let url = "api/" + this.id;
-
-    fetch(url, {method : 'delete'})
     .then((resp) => resp.json())
     .then((data) => {
       console.log(data);
@@ -29,7 +17,20 @@
     });
   }
 
-  function insertRecord(){
+  function deleteRecord() {
+    let url = "api/" + this.id;
+
+    fetch(url, { method : 'delete' })
+    .then((resp) => resp.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+  }
+
+  function insertRecord() {
     let url = "api/" + this.id;
 
     fetch(url, {
@@ -45,7 +46,7 @@
         modelDetails : "lots and lots of text",
         imgPath : "F56.jpg"
       })
-  })
+    })
     .then((resp) => resp.json())
     .then((data) => {
       console.log(data);
@@ -54,9 +55,8 @@
       console.log(error);
     });
   }
-
+  // event handling always goes at the bottom
   getButtons.forEach(button => button.addEventListener('click', fetchData));
   deleteButton.addEventListener('click', deleteRecord, false);
-  postButton.addEventListener('click', insertRecord, false);
-
+  postButton.addEventListener('click', insertRecord);
 })();
